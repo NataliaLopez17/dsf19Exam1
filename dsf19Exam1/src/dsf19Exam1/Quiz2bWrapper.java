@@ -1,41 +1,33 @@
 package dsf19Exam1;
 public class Quiz2bWrapper {
-	
-	/*Consider a member method equalSet, which determines if  
-	 * another set S is equal to this set. Recall that two sets are equal, 
-	 * if and only if they have the same elements. Implement method equalSet. 
-	 * If the two sets are emtpy, then they are equal. 
-	 * For example, is S1 = {Joe, Ned, Tom}, S2 = {Joe, Ned}, 
-	 * and S3 = {Joe, Tom, Ned}, them S1.equalSet(S2) is false, 
-	 * but S1.equalSet(S3) is true. 
-	 * Remember: Sets are unordered.
-	 */
-	
+
+
+
 	public static interface Set<E> {
-	    public int size();
-	    
-	    public boolean isEmpty();
-	    
-	    public void add(E e);
-	    
-	    public boolean isMember(E e);
-	    
-	    public boolean remove(E e);
-	            
-	    public void clear();
-	    
-	    public boolean isSubset(Set<E> S);
-	    
-	    public Set<E> union(Set<E> S);
-	    
-	    public Set<E> difference(Set<E> S);
+		public int size();
 
-	    public Set<E> intersection(Set<E> S);
+		public boolean isEmpty();
 
-	    public E[] toArray();
-	    
-	    public boolean equalSet(Set<E> S);
-	    
+		public void add(E e);
+
+		public boolean isMember(E e);
+
+		public boolean remove(E e);
+
+		public void clear();
+
+		public boolean isSubset(Set<E> S);
+
+		public Set<E> union(Set<E> S);
+
+		public Set<E> difference(Set<E> S);
+
+		public Set<E> intersection(Set<E> S);
+
+		public E[] toArray();
+
+		public boolean equalSet(Set<E> S);
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,12 +71,12 @@ public class Quiz2bWrapper {
 		}
 
 		private void reAllocate() {
-	        E temp[] = (E[]) new Object[2*this.size()];
-	        for (int i=0; i < this.size(); ++i) {
-	                temp[i] = this.elements[i];
-	        }
-	        this.elements = temp;
-			
+			E temp[] = (E[]) new Object[2*this.size()];
+			for (int i=0; i < this.size(); ++i) {
+				temp[i] = this.elements[i];
+			}
+			this.elements = temp;
+
 		}
 
 		@Override
@@ -113,10 +105,10 @@ public class Quiz2bWrapper {
 
 		@Override
 		public void clear() {
-	        for (int i=0; i < this.size(); ++i) {
-	            this.elements[i] = null;
-	        }
-	        this.currentSize = 0; 
+			for (int i=0; i < this.size(); ++i) {
+				this.elements[i] = null;
+			}
+			this.currentSize = 0; 
 		}
 
 		@Override
@@ -155,7 +147,7 @@ public class Quiz2bWrapper {
 				}
 			}
 			return result;
-			
+
 
 		}
 
@@ -167,19 +159,33 @@ public class Quiz2bWrapper {
 		@Override
 		public E[] toArray() {
 			E result[] = (E[]) new Object[this.size()];
-			
+
 			for (int i=0; i < this.size(); ++i) {
 				result[i]  = this.elements[i];
 			}
-			
+
 			return result;
 
 		}
 
+		/*Consider a member method equalSet, which determines if  
+		 * another set S is equal to this set. Recall that two sets are equal, 
+		 * if and only if they have the same elements. Implement method equalSet. 
+		 * If the two sets are emtpy, then they are equal. 
+		 * For example, is S1 = {Joe, Ned, Tom}, S2 = {Joe, Ned}, 
+		 * and S3 = {Joe, Tom, Ned}, them S1.equalSet(S2) is false, 
+		 * but S1.equalSet(S3) is true. 
+		 * Remember: Sets are unordered.
+		 */
 		@Override
 		public boolean equalSet(Set<E> S) {
+			if(S.isEmpty() && this.isEmpty()) {
+				return true;
+			}
+			if(this.isSubset(S.intersection(this))) {
+				return true;
+			}
 			return false;
-			// ADD YOUR CODE HERE
 		}
 	}
 }

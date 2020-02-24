@@ -5,14 +5,7 @@ import java.util.NoSuchElementException;
 
 public class LinkedListWrapper2 {
 	
-	/* Consider a member method findDuplicates which returns a new
-	 *  List with all the elements that appear more than once 
-	 *  in the original list. The resulting list itself cannot have duplicates. 
-	 *  If there are no duplicates, the method returns an empty list. 
-	 *  Implement this method for the SinglyLinkedList class.
-	 *  For example, if L = {1, 0, 4, 3, 1, 1, 2, 4}, then L.findDuplicates() 
-	 *  returns {1, 4}. 
-	 */
+	
 	public static interface List<E> extends Iterable<E> {
 		
 		public int size();
@@ -306,9 +299,18 @@ public class LinkedListWrapper2 {
 		}
 
 
+		/* Consider a member method findDuplicates which returns a new
+		 *  List with all the elements that appear more than once 
+		 *  in the original list. The resulting list itself cannot have duplicates. 
+		 *  If there are no duplicates, the method returns an empty list. 
+		 *  Implement this method for the SinglyLinkedList class.
+		 *  For example, if L = {1, 0, 4, 3, 1, 1, 2, 4}, then L.findDuplicates() 
+		 *  returns {1, 4}. 
+		 */
 		@Override
 		public List<E> findDuplicates() {
-			List<E> emptyList = new SinglyLinkedList<E>();
+			/*
+			 * List<E> emptyList = new SinglyLinkedList<E>();
 			List<E> newList = new SinglyLinkedList<E>();
 			Node<E> newNode = this.header;
 			E element = newNode.getElement();
@@ -323,6 +325,27 @@ public class LinkedListWrapper2 {
 				newNode = newNode.getNext();
 			}
 			return newList;
+			 */
+			
+			List<E> result = new SinglyLinkedList<E>();
+			List<E> emptyList = new SinglyLinkedList<E>();
+			Node<E> curNode = this.header;
+			Node<E> nextNode = curNode.getNext();
+			int counter = 0;
+			
+			while(curNode != null) {
+				if(nextNode.getElement().equals(this.header.getNext().getElement())){
+					result.add(nextNode.getElement());
+				}
+				curNode = curNode.getNext();
+			}
+			
+			
+			for(int i = 0; i < result.size(); i++) {
+			}
+			
+			return result;
+			
 		}
 
 	}

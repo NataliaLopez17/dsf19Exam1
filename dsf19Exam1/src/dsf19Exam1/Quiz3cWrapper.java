@@ -4,14 +4,7 @@ import java.util.NoSuchElementException;
 
 public class Quiz3cWrapper {
 	
-	/*Consider a member method keepOdd for the List ADT. 
-	 * This method takes a list L and only keeps the elements 
-	 * in the odd positions (i.e., 1, 3, 5, ...) . 
-	 * The method returns the number of elements in even positions 
-	 * that were discarded. Implement this method for the ArrayList class. 
-	 * For example, if L = {Ron, Bob, Ken, Moe} then L.keepOdd() 
-	 * turns L into L = {Bob, Moe} and returns 2.
-	 */
+	
 
 	public interface List<E> extends Iterable<E> {
 		
@@ -219,8 +212,17 @@ public class Quiz3cWrapper {
 			return -1;
 		}
 
+		/*Consider a member method keepOdd for the List ADT. 
+		 * This method takes a list L and only keeps the elements 
+		 * in the odd positions (i.e., 1, 3, 5, ...) . 
+		 * The method returns the number of elements in even positions 
+		 * that were discarded. Implement this method for the ArrayList class. 
+		 * For example, if L = {Ron, Bob, Ken, Moe} then L.keepOdd() 
+		 * turns L into L = {Bob, Moe} and returns 2.
+		 */
 		public int keepOdd() {
-			int counter = 0;
+			/*
+			 * int counter = 0;
 			for(int i = 0; i < this.currentSize; i++) {
 				if(i%2 == 0) {
 					this.elements[i] = null;
@@ -228,6 +230,20 @@ public class Quiz3cWrapper {
 				}
 			}
 			return counter;
+			 */
+			
+			int counter = 0;
+			List<E> newList = new ArrayList<E>();
+			for(int i = 0; i < this.size(); i++) {
+				if(i%2 == 0) {
+					newList.add(this.get(i));
+					this.elements[i] = null;
+					counter++;
+				}
+				
+			}
+			return counter;
+			
 		}	
 		
 

@@ -4,14 +4,7 @@ import java.util.NoSuchElementException;
 
 public class LinkedListWrapper {
 	
-	/*Consider a member method of the List ADT named addBeforeEach(). 
-	 * This method receives as parameters two objects e and f. 
-	 * The methods adds element f before every copy of the element e in a list L. 
-	 * Implement this method for the SinglyLinkedList class.
-	 * For example, if L = {Ken, Bob, Ron, Apu, Ron}, 
-	 * the L.addBeforeEach("Ron", "Jim") 
-	 * makes L = {Ken, Bob, Jim, Ron, Apu, Jim, Ron}. 
-	 */
+	
 	public static interface List<E> extends Iterable<E> {
 		
 		public int size();
@@ -305,9 +298,26 @@ public class LinkedListWrapper {
 		}
 
 
+		/*Consider a member method of the List ADT named addBeforeEach(). 
+		 * This method receives as parameters two objects e and f. 
+		 * The methods adds element f before every copy of the element e in a list L. 
+		 * Implement this method for the SinglyLinkedList class.
+		 * For example, if L = {Ken, Bob, Ron, Apu, Ron}, 
+		 * the L.addBeforeEach("Ron", "Jim") 
+		 * makes L = {Ken, Bob, Jim, Ron, Apu, Jim, Ron}. 
+		 */
 		@Override
 		public void addBeforeEach(E e, E f) {
-			// ADD YOUR CODE
+			Node<E> curNode = this.header;
+			Node<E> nextNode = curNode.getNext();
+			
+			while(curNode != null) {
+				if(nextNode.getElement().equals(e)) {
+					curNode.setNext(new Node<E>(f, nextNode));
+				}
+				
+				curNode = curNode.getNext();
+			}
 		}
 
 	}

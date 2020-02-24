@@ -138,15 +138,30 @@ public class BagWrapper {
 	}
 	
 	// NON-MEMBER METHOD
-	
+	/*
+	 * Write a non-member method removeDuplicates. This method receives as parameter  a Bag B. It removes all duplicates from the bag B, leaving only one copy of each element. The method returns the number of duplicates removed.
+	 * For example, if B = {Ron, Ken, Xi, Moe, Ron, Ken, Ron} then removeDuplicates(B) make B = {Ron,  Ken, Xi, Moe} and returns 3 because it erased two copies of Ron and one copy of Ken.
+	 */
 	public static int  removeDuplicates(Bag B) {
-		Object[] array = B.toArray();
-		int counter = 0;
+		/*
+		 * Object[] array = B.toArray();
+		 * int counter = 0;
 		for(int i = 0; i < array.length; i++) {
 			if(B.count(array[i]) > 1) {
 				B.remove(array[array.length -1]);
 				counter++;
 			}
+		}
+		return counter;
+		 */
+		
+		Object[] result = B.toArray();
+		int counter = 0;
+		int i = 0;
+		if(B.isMember(result[i])) {
+			counter++;
+			i++;
+			B.remove(result[i]);
 		}
 		return counter;
 	}
