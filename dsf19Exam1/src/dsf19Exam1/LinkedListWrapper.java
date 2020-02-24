@@ -2,50 +2,53 @@ package dsf19Exam1;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import dsf19Exam1.BagWrapper.Bag;
+import dsf19Exam1.BagWrapper.DynamicBag;
+
 public class LinkedListWrapper {
-	
-	
+
+
 	public static interface List<E> extends Iterable<E> {
-		
+
 		public int size();
-		
+
 		public boolean isEmpty();
-		
+
 		public boolean isMember(E e);
-		
+
 		public int firstIndexOf(E e);
-		
+
 		public int lastIndexOf(E e);
 
 		public void add(E e);
-		
+
 		public void add(E e, int index);
-		
+
 		public E get(int index);
-		
+
 		public E remove(int index);
-		
-	    public boolean remove(E e);
-	    
-	    public int removeAll(E e);
-	    
+
+		public boolean remove(E e);
+
+		public int removeAll(E e);
+
 		public E replace(int index, E newElement);
-		
+
 		public void clear();
-		
+
 		public Object[] toArray();	
-		
+
 		public void addBeforeEach(E e, E f);
 
 	}
-	
+
 	public static class SinglyLinkedList<E> implements List<E> {
 
 		@SuppressWarnings("hiding")
 		private class SinglyLinkedListIterator<E> implements Iterator<E>{
 			private Node<E> nextNode;
-			
-			
+
+
 
 			@SuppressWarnings("unchecked")
 			public SinglyLinkedListIterator() {
@@ -67,13 +70,13 @@ public class LinkedListWrapper {
 					throw new NoSuchElementException();
 				}
 			}
-			
+
 		}
-		
+
 		private static class Node<E> {
 			private E element;
 			private Node<E> next;
-			
+
 			public Node(E element, Node<E> next) {
 				super();
 				this.element = element;
@@ -82,7 +85,7 @@ public class LinkedListWrapper {
 			public Node() {
 				super();
 			}
-			
+
 			public E getElement() {
 				return element;
 			}
@@ -96,18 +99,18 @@ public class LinkedListWrapper {
 				this.next = next;
 			}
 
-			
+
 		}
 
 		private Node<E> header;
 		private int currentSize;
-		
+
 		public SinglyLinkedList() {
 			this.header = new Node<>();
 			this.currentSize = 0;
 		}
-		
-		
+
+
 		@Override
 		public int size() {
 			return this.currentSize;
@@ -151,7 +154,7 @@ public class LinkedListWrapper {
 				temp.setNext(newNode);
 				this.currentSize++;
 			}
-			
+
 		}
 
 		@Override
@@ -183,16 +186,16 @@ public class LinkedListWrapper {
 			if ((position < 0) || position >= this.currentSize) {
 				throw new IndexOutOfBoundsException();
 			}
-			
+
 			Node<E> temp  = this.getPosition(position);
 			return temp.getElement();
-			
+
 		}
 
 		private Node<E> getPosition(int index){
 			int currentPosition=0;
 			Node<E> temp = this.header.getNext();
-			
+
 			while(currentPosition != index) {
 				temp = temp.getNext();
 				currentPosition++;
@@ -200,7 +203,7 @@ public class LinkedListWrapper {
 			return temp;
 
 		}
-		
+
 		@Override
 		public E remove(int index) {
 			if ((index < 0) || (index >= this.currentSize)){
@@ -210,7 +213,7 @@ public class LinkedListWrapper {
 				Node<E> temp = this.header;
 				int currentPosition =0;
 				Node<E> target = null;
-				
+
 				while (currentPosition != index) {
 					temp = temp.getNext();
 					currentPosition++;
@@ -223,7 +226,7 @@ public class LinkedListWrapper {
 				target.setNext(null);
 				this.currentSize--;
 				return result;
-				
+
 			}
 		}
 
@@ -236,7 +239,7 @@ public class LinkedListWrapper {
 			E result = temp.getElement();
 			temp.setElement(newElement);
 			return result;
-			
+
 		}
 
 		@Override
@@ -310,15 +313,18 @@ public class LinkedListWrapper {
 		public void addBeforeEach(E e, E f) {
 			Node<E> curNode = this.header;
 			Node<E> nextNode = curNode.getNext();
-			
+
 			while(curNode != null) {
 				if(nextNode.getElement().equals(e)) {
 					curNode.setNext(new Node<E>(f, nextNode));
 				}
-				
+
 				curNode = curNode.getNext();
 			}
-		}
+			for(E i: this) {
+				System.out.println(i);
 
+			}
+		}
 	}
 }
